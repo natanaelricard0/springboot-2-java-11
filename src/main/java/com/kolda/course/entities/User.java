@@ -12,9 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_user")
-public class User1 implements Serializable {
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -26,13 +28,14 @@ public class User1 implements Serializable {
 	private String phone;
 	private String password;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
 	
-	public User1() {
+	public User() {
 	}
 
-	public User1(Long id, String name, String email, String phone, String password) {
+	public User(Long id, String name, String email, String phone, String password) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -97,7 +100,7 @@ public class User1 implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User1 other = (User1) obj;
+		User other = (User) obj;
 		return Objects.equals(id, other.id);
 	}
 }

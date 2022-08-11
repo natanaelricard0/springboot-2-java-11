@@ -12,26 +12,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "client_id")
-	private User1 client;
-	
+	private User client;
+
 	public Order() {
-		
+
 	}
 
-	public Order(Long id, Instant moment, User1 client) {
+	public Order(Long id, Instant moment, User client) {
 		super();
 		this.id = id;
 		this.moment = moment;
@@ -54,11 +59,11 @@ public class Order implements Serializable {
 		this.moment = moment;
 	}
 
-	public User1 getClient() {
+	public User getClient() {
 		return client;
 	}
 
-	public void setClient(User1 client) {
+	public void setClient(User client) {
 		this.client = client;
 	}
 
@@ -78,6 +83,5 @@ public class Order implements Serializable {
 		Order other = (Order) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
 }

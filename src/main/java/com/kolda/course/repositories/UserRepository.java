@@ -2,8 +2,8 @@ package com.kolda.course.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.kolda.course.entities.User1;
+import com.kolda.course.entities.User;
 
-public interface UserRepository extends JpaRepository<User1, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
 }
